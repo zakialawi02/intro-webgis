@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Webgis</title>
+
+  <!-- leaflet system -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav-logo">
+        <div class="name-logo">
+          <h1>Judul/Title Text</h1>
+        </div>
+      </div>
+      <div class="nav-menu">
+        <ul class="nav-menu-group">
+          <li>
+            <a href="#" id="">menu 1</a>
+          </li>
+          <li><a href="#" id="">menu 2</a></li>
+          <li><a href="#" id="">menu 3</a></li>
+        </ul>
+        <div class="hamb">+</div>
+      </div>
+    </nav>
+  </header>
+
+
+  <div id="map"></div>
+
+  <script>
+    // set view pada peta
+    const map = L.map("map").setView([-7.279802042230601, 112.79447151160886], 13);
+
+    // set basemap
+    const tiles = L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 20,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }
+    ).addTo(map);
+
+    // Definisikan variabel untuk properti style
+    var poligonStyle = {
+      color: '#fcbe03', // Warna garis tepi 
+      fillColor: '#fcbe03', // Warna isi polygon
+      fillOpacity: 0.5, // Opasitas isi polygon
+      weight: 2 // Ketebalan garis tepi polygon
+    };
+
+    var geojsonData = {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [112.78404308295886, -7.259453402795578],
+            [112.7798373792234, -7.264306509215643],
+            [112.7826697919431, -7.268265583563278],
+            [112.77288509345684, -7.263412519858672],
+            [112.78404308295886, -7.259453402795578]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Jakarta",
+        "area": 662.33
+      }
+    };
+
+    L.geoJSON(geojsonData).addTo(map);
+
+    var geojsonData2 = {
+      "type": "FeatureCollection",
+      "features": [{
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [112.79351003991691, -7.2510010055672645],
+                [112.80011900292955, -7.257259066422216],
+                [112.79110678063958, -7.25491762526902],
+              ]
+            ]
+          },
+          "properties": {
+            "name": "Surabaya",
+            "area": 362.33
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [112.77751995063453, -7.248342146008035],
+                [112.78490138984344, -7.251790496378697],
+                [112.78069568610813, -7.25809111772667],
+              ]
+            ]
+          },
+          "properties": {
+            "name": "Bandung",
+            "area": 66.33
+          }
+        }
+      ]
+    };;
+
+    L.geoJSON(geojsonData2).addTo(map);
+  </script>
+
+</body>
+
+</html>

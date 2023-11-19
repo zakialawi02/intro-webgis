@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Webgis</title>
+
+  <!-- leaflet system -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav-logo">
+        <div class="name-logo">
+          <h1>Judul/Title Text</h1>
+        </div>
+      </div>
+      <div class="nav-menu">
+        <ul class="nav-menu-group">
+          <li>
+            <a href="#" id="">menu 1</a>
+          </li>
+          <li><a href="#" id="">menu 2</a></li>
+          <li><a href="#" id="">menu 3</a></li>
+        </ul>
+        <div class="hamb">+</div>
+      </div>
+    </nav>
+  </header>
+
+
+  <div id="map"></div>
+
+  <script>
+    // set view pada peta
+    const map = L.map("map").setView([-7.279802042230601, 112.79447151160886], 13);
+
+    // set basemap
+    const tiles = L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 20,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }
+    ).addTo(map);
+
+    // create poligon modify
+    var polygon2 = L.polygon([
+      [-7.259453402795578, 112.78404308295886],
+      [-7.264306509215643, 112.7798373792234],
+      [-7.268265583563278, 112.7826697919431],
+      [-7.263412519858672, 112.77288509345684],
+    ], {
+      color: 'blue', // Warna garis tepi 
+      fillColor: '#f03', // Warna isi polygon
+      fillOpacity: 0.5, // Opasitas isi polygon
+      weight: 2 // Ketebalan garis tepi polygon
+    }).bindPopup("content here").addTo(map);
+
+
+    // Definisikan variabel untuk properti style
+    var poligonStyle = {
+      color: '#fcbe03', // Warna garis tepi 
+      fillColor: '#fcbe03', // Warna isi polygon
+      fillOpacity: 0.5, // Opasitas isi polygon
+      weight: 2 // Ketebalan garis tepi polygon
+    };
+
+    // create polygon modify
+    var polygon3 = L.polygon([
+      [-7.248342146008035, 112.77751995063453],
+      [-7.251790496378697, 112.78490138984344],
+      [-7.25809111772667, 112.78069568610813],
+    ], poligonStyle).bindPopup(`<div class="popup-content">
+      <img class="img-popup" src="https://placehold.co/400">
+      <h4>NAAMA TEMPAT</h4>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo, facilis.</p>
+      </div>`).addTo(map);
+
+    // create linestring modify
+    var line = L.polyline([
+      [-7.240838143457724, 112.76954749191812],
+      [-7.2454550826886965, 112.76941639110983],
+      [-7.247340861165597, 112.77590588112004],
+      [-7.2524129158301385, 112.77413602020816],
+      [-7.259890840908777, 112.7758403307159],
+    ], poligonStyle).addTo(map);
+
+    // Definisikan variabel untuk properti style
+    var customIcon = L.icon({
+      iconUrl: 'assets/icon/locPos.png', // URL gambar ikon
+      iconSize: [40, 40], // Ukuran ikon [lebar, tinggi]
+      iconAnchor: [20, 40], // Posisi anchor ikon [x, y]
+      popupAnchor: [0, -40] // Posisi popup anchor ikon [x, y]
+    });
+
+    // create marker custom
+    var marker2 = L.marker([-7.260093196025478, 112.77391540258965], {
+      icon: customIcon
+    }).bindPopup(`<div class="popup-content">
+      <img class="img-popup" src="https://placehold.co/400">
+      <h4>TEMPAT AAAAA</h4>
+      <p>Lorem ipsum dolor sit amet consectetur.</p>
+      </div>`).addTo(map);
+  </script>
+
+</body>
+
+</html>
