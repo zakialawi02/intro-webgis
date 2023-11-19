@@ -8,6 +8,10 @@
   scroll-behavior: smooth;
 }
 
+#map {
+  height: 92vh;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
@@ -71,4 +75,22 @@ header .nav-menu .hamb {
   display: none;
   font-size: x-large;
   font-weight: 700;
+}
+
+/* popup map */
+.img-popup {
+  max-width: 10rem;
+}
+
+.popup-content h4 {
+  font-size: 1rem;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding-bottom: 3px;
+}
+
+.popup-content p {
+  margin: 2px;
+  padding: 2px;
+  word-wrap: break-word;
 }
