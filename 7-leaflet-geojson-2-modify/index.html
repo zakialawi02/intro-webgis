@@ -74,6 +74,7 @@
       }).addTo(map);
     });
 
+    // menetapkan warna symbology berdasarkan luasan, dan reclasiffy
     function getColor(d) {
       if (d > 2100) {
         return '#640569';
@@ -94,6 +95,7 @@
       }
     }
 
+    // untuk sybmology
     var fillStyle = function (feature) {
       return {
         fillColor: getColor(feature.properties.Luasan),
@@ -104,12 +106,25 @@
       };
     }
 
+    // fungsi untuk ambil data popup geojson
     var onEachFeature = function (feature, layer) {
       var popupContent = `<p>Kode kecamatan: ${feature.properties.CC_3} </p>
                           <p>Provinsi: ${feature.properties.NAME_1} </p>
                           <p>Luas kecamatan: ${feature.properties.Luasan} M^2 </p>`;
       layer.bindPopup(popupContent);
     }
+
+    // fungsi untuk ambil data popup geojson
+    // var onEachFeature = function (feature, layer) {
+    //   function onEachFeature(feature, layer) {
+    //     var popupContent = "<p>";
+    //     for (var property in feature.properties) {
+    //       popupContent += property + ": " + feature.properties[property] + "<br>";
+    //     }
+    //     popupContent += "</p>";
+    //     layer.bindPopup(popupContent);
+    //   }
+    // }
   </script>
 
 </body>
