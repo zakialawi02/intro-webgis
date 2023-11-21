@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Webgis</title>
+
+  <!-- leaflet system -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="nav-logo">
+        <div class="name-logo">
+          <h1>Judul/Title Text</h1>
+        </div>
+      </div>
+      <div class="nav-menu">
+        <ul class="nav-menu-group">
+          <li>
+            <a href="#" id="">menu 1</a>
+          </li>
+          <li><a href="#" id="">menu 2</a></li>
+          <li><a href="#" id="">menu 3</a></li>
+        </ul>
+        <div class="hamb">+</div>
+      </div>
+    </nav>
+  </header>
+
+
+  <div id="map"></div>
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+  <script>
+    // set view pada peta
+    const map = L.map("map").setView([-7.279802042230601, 112.79447151160886], 13);
+
+    // set basemap
+    const baseLayers = L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 20,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }
+    ).addTo(map);
+
+    // make group data
+    var adminSBY = L.layerGroup().addTo(map);
+    var defaultLeaflet = L.layerGroup().addTo(map);
+    var customLeaflet = L.layerGroup().addTo(map);
+
+    // create point
+    var marker = L.marker([-7.28, 112.8]).addTo(defaultLeaflet);
+
+    // create poligon
+    var polygon = L.polygon([
+      [-7.264178796634931, 112.81361175513909],
+      [-7.266647901560938, 112.81949115729968],
+      [-7.269968400585907, 112.81331134772942],
+      [-7.266690472216569, 112.80477119422606],
+      [-7.2610711108124635, 112.80644489265134],
+    ]).addTo(defaultLeaflet);
+
+    // create circle
+    var circle = L.circle([-7.264391651052065, 112.79614521003413], {
+      radius: 500
+    }).addTo(defaultLeaflet);
+
+    // create linestring
+    var line = L.polyline([
+      [-7.262263102423718, 112.82193733192105],
+      [-7.265072784457031, 112.82940460181845],
+      [-7.26758445504208, 112.82991958594931],
+      [-7.270266392877089, 112.82970500922812],
+      [-7.272267193212387, 112.82485557532922],
+    ]).addTo(defaultLeaflet);
+
+    // create poligon modify
+    var polygon2 = L.polygon([
+      [-7.259453402795578, 112.78404308295886],
+      [-7.264306509215643, 112.7798373792234],
+      [-7.268265583563278, 112.7826697919431],
+      [-7.263412519858672, 112.77288509345684],
+    ], {
+      color: 'blue', // Warna garis tepi 
+      fillColor: '#f03', // Warna isi polygon
+      fillOpacity: 0.5, // Opasitas isi polygon
+      weight: 2, // Ketebalan garis tepi polygon
+    }).bindPopup("content here").addTo(customLeaflet);
+
+    // Definisikan variabel untuk properti style
+    var poligonStyle = {
+      color: '#fcbe03', // Warna garis tepi 
+      fillColor: '#fcbe03', // Warna isi polygon
+      fillOpacity: 0.5, // Opasitas isi polygon
+      weight: 2, // Ketebalan garis tepi polygon
+    };
+
+    // create polygon modify
+    var polygon3 = L.polygon([
+      [-7.248342146008035, 112.77751995063453],
+      [-7.251790496378697, 112.78490138984344],
+      [-7.25809111772667, 112.78069568610813],
+    ], poligonStyle).bindPopup(`<div class="popup-content">
+      <img class="img-popup" src="https://placehold.co/400">
+      <h4>NAAMA TEMPAT</h4>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo, facilis.</p>
+      </div>`).addTo(customLeaflet);
+
+    // create linestring modify
+    var line = L.polyline([
+      [-7.240838143457724, 112.76954749191812],
+      [-7.2454550826886965, 112.76941639110983],
+      [-7.247340861165597, 112.77590588112004],
+      [-7.2524129158301385, 112.77413602020816],
+      [-7.259890840908777, 112.7758403307159],
+    ], poligonStyle).addTo(customLeaflet);
+
+    // Definisikan variabel untuk properti style
+    var customIcon = L.icon({
+      iconUrl: 'assets/icon/locPos.png', // URL gambar ikon
+      iconSize: [40, 40], // Ukuran ikon [lebar, tinggi]
+      iconAnchor: [20, 40], // Posisi anchor ikon [x, y]
+      popupAnchor: [0, -40] // Posisi popup anchor ikon [x, y]
+    });
+
+    // create marker custom
+    var marker2 = L.marker([-7.260093196025478, 112.77391540258965], {
+      icon: customIcon
+    }).bindPopup(`<div class="popup-content">
+      <img class="img-popup" src="https://placehold.co/400">
+      <h4>TEMPAT AAAAA</h4>
+      <p>Lorem ipsum dolor sit amet consectetur.</p>
+      </div>`).addTo(customLeaflet);
+
+    // Baca file GeoJSON dan tambahkan ke peta
+    $.getJSON("assets/geojson/administrasi_sby.geojson", function (data) {
+      // Tambahkan GeoJSON sebagai layer pada peta
+      var geojsonLayer = L.geoJSON(data, {
+        style: fillStyle,
+        onEachFeature: onEachFeature
+      }).addTo(adminSBY);
+
+      geojsonLayer.bringToBack();
+    });
+
+    // menetapkan warna symbology berdasarkan luasan, dan reclasiffy
+    function getColor(d) {
+      if (d > 2100) {
+        return '#640569';
+      } else if (d > 1800) {
+        return '#97099e';
+      } else if (d > 1500) {
+        return '#be1ec7';
+      } else if (d > 1200) {
+        return '#de50e6';
+      } else if (d > 900) {
+        return '#d86fde';
+      } else if (d > 600) {
+        return '#df96e3';
+      } else if (d > 300) {
+        return '#e4bee6';
+      } else {
+        return '#e8e6e8';
+      }
+    }
+
+    // untuk sybmology
+    var fillStyle = function (feature) {
+      return {
+        fillColor: getColor(feature.properties.Luasan),
+        weight: 2,
+        opacity: 1,
+        color: '#212121',
+        fillOpacity: 0.7
+      };
+    }
+
+    // fungsi untuk ambil data popup geojson
+    var onEachFeature = function (feature, layer) {
+      var popupContent = `<p>Kode kecamatan: ${feature.properties.CC_3} </p>
+                          <p>Provinsi: ${feature.properties.NAME_1} </p>
+                          <p>Luas kecamatan: ${feature.properties.Luasan} M^2 </p>`;
+      layer.bindPopup(popupContent);
+    }
+
+    // Membuat objek control layers
+    var controlLayers = L.control.layers(null, null, {
+      collapsed: false // Untuk membuat control layers dalam keadaan terbuka
+    });
+
+    // Menambahkan layer grup ke dalam control layers
+    controlLayers.addOverlay(adminSBY, 'Administaris Surabaya');
+    controlLayers.addOverlay(defaultLeaflet, 'Default Leaflet');
+    controlLayers.addOverlay(customLeaflet, 'Custom Leaflet');
+
+    // Menambahkan control layers ke peta
+    controlLayers.addTo(map);
+  </script>
+
+</body>
+
+</html>
