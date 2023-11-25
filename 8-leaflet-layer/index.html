@@ -58,9 +58,22 @@
     ).addTo(map);
 
     // make group data
-    var adminSBY = L.layerGroup().addTo(map);
-    var defaultLeaflet = L.layerGroup().addTo(map);
-    var customLeaflet = L.layerGroup().addTo(map);
+    let adminSBY = L.layerGroup().addTo(map);
+    let defaultLeaflet = L.layerGroup().addTo(map);
+    let customLeaflet = L.layerGroup().addTo(map);
+
+    // Membuat objek control layers
+    let controlLayers = L.control.layers(null, null, {
+      collapsed: false // Untuk membuat control layers dalam keadaan terbuka/tertutup (true)
+    });
+
+    // Menambahkan layer grup ke dalam control layers
+    controlLayers.addOverlay(adminSBY, 'Administaris Surabaya');
+    controlLayers.addOverlay(defaultLeaflet, 'Default Leaflet');
+    controlLayers.addOverlay(customLeaflet, 'Custom Leaflet');
+
+    // Menambahkan control layers ke peta
+    controlLayers.addTo(map);
 
     // create point
     var marker = L.marker([-7.28, 112.8]).addTo(defaultLeaflet);
@@ -196,19 +209,6 @@
                           <p>Luas kecamatan: ${feature.properties.Luasan} M^2 </p>`;
       layer.bindPopup(popupContent);
     }
-
-    // Membuat objek control layers
-    var controlLayers = L.control.layers(null, null, {
-      collapsed: false // Untuk membuat control layers dalam keadaan terbuka
-    });
-
-    // Menambahkan layer grup ke dalam control layers
-    controlLayers.addOverlay(adminSBY, 'Administaris Surabaya');
-    controlLayers.addOverlay(defaultLeaflet, 'Default Leaflet');
-    controlLayers.addOverlay(customLeaflet, 'Custom Leaflet');
-
-    // Menambahkan control layers ke peta
-    controlLayers.addTo(map);
   </script>
 
 </body>
