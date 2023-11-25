@@ -11,3 +11,7 @@
 [hasil data dengan file geojson](https://zakialawi02.github.io/intro-webgis/6-leaflet-geojson-2/)
 
 [hasil file geojson dengan symbology dan popup](https://zakialawi02.github.io/intro-webgis/7-leaflet-geojson-2-modify/)
+
+[hasil controllayer](https://zakialawi02.github.io/intro-webgis/8-leaflet-layer/)
+
+[hasil Basemap Switcher Layer](https://zakialawi02.github.io/intro-webgis/9-leaflet-basemapLayer/)
