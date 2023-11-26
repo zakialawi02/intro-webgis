@@ -33,46 +33,69 @@
       <div class="nav-menu">
         <ul class="nav-menu-group">
           <li>
-            <a href="#" id="">Layer</a>
+            <a href="#" id="layer-toggle">Layer</a>
           </li>
           <li><a href="#" id="">menu 2</a></li>
-          <li><a href="#" id="">menu 3</a></li>
+          <li><a href="#" id="info-toggle">Info</a></li>
         </ul>
         <div class="hamb">+</div>
       </div>
     </nav>
   </header>
 
-  <div class="">
-    <input type="checkbox" id="batasITSCheckbox" checked>
-    <label for="batasITSCheckbox">Garis Batas ITS</label>
+  <div class="layer-panel">
+    <div class="panel-body">
+      <p class="text-panel" style="margin-top: 0;">Layer Data</p>
+      <div class="layer-item">
+        <input type="checkbox" id="batasITSCheckbox" checked>
+        <label for="batasITSCheckbox">Garis Batas ITS</label>
+      </div>
+      <div class="layer-item">
+        <input type="checkbox" id="zonaITSCheckbox" checked>
+        <label for="zonaITSCheckbox">Zona</label>
+      </div>
+      <div class="layer-item">
+        <input type="checkbox" id="departemenITSCheckbox" checked>
+        <label for="departemenITSCheckbox">Departemen</label>
+      </div>
+      <div class="layer-item">
+        <input type="checkbox" id="gedungITSCheckbox" checked>
+        <label for="gedungITSCheckbox">Gedung</label>
+      </div>
+      <div class="layer-item">
+        <input type="checkbox" id="uptITSCheckbox" checked>
+        <label for="uptITSCheckbox">Unit Pelaksana Teknis</label>
+      </div>
+      <div class="layer-item">
+        <input type="checkbox" id="masjidITSCheckbox" checked>
+        <label for="masjidITSCheckbox">Masjid</label>
+      </div>
 
-    <input type="checkbox" id="zonaITSCheckbox" checked>
-    <label for="zonaITSCheckbox">Zona</label>
+      <p class="text-panel">Basemap</p>
+      <div class="layer-item">
+        <input type="radio" name="basemap" id="mapboxStreets" value="peta1">
+        <label for="mapboxStreets">Mapbox Streets</label>
+      </div>
+      <div class="layer-item">
+        <input type="radio" name="basemap" id="googleMaps" value="peta2">
+        <label for="googleMaps">Google Maps</label>
+      </div>
+      <div class="layer-item">
+        <input type="radio" name="basemap" id="openStreetMap" value="peta3" checked>
+        <label for="openStreetMap">OpenStreetMap</label>
+      </div>
+      <div class="layer-item">
+        <input type="radio" name="basemap" id="mapboxDark" value="peta4">
+        <label for="mapboxDark">Mapbox Dark</label>
+      </div>
+    </div>
+  </div>
 
-    <input type="checkbox" id="departemenITSCheckbox" checked>
-    <label for="departemenITSCheckbox">Departemen</label>
-
-    <input type="checkbox" id="gedungITSCheckbox" checked>
-    <label for="gedungITSCheckbox">Gedung</label>
-
-    <input type="checkbox" id="uptITSCheckbox" checked>
-    <label for="uptITSCheckbox">Unit Pelaksana Teknis</label>
-
-    <input type="checkbox" id="masjidITSCheckbox" checked>
-    <label for="masjidITSCheckbox">Masjid</label>
-
-    <input type="radio" name="basemap" id="mapboxStreets" value="peta1">
-    <label for="mapboxStreets">Mapbox Streets</label>
-
-    <input type="radio" name="basemap" id="googleMaps" value="peta2">
-    <label for="googleMaps">Google Maps</label>
-
-    <input type="radio" name="basemap" id="openStreetMap" value="peta3" checked>
-    <label for="openStreetMap">OpenStreetMap</label>
-
-    <input type="radio" name="basemap" id="mapboxDark" value="peta4">
-    <label for="mapboxDark">Mapbox Dark</label>
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModalBtn">&times;</span>
+      <p>Hello! This is a simple modal.</p>
+    </div>
   </div>
 
   <div id="map"></div>
@@ -116,7 +139,7 @@
       layers: [peta3],
       zoomControl: true,
     });
-
+    L.control.scale().addTo(map);
 
     // make group data
     let zonaITS = L.layerGroup().addTo(map);
@@ -137,7 +160,7 @@
     });
 
     // Menambahkan control layers ke peta
-    controlLayers.addTo(map);
+    // controlLayers.addTo(map);
 
     // add data zona
     // Baca file GeoJSON dan tambahkan ke peta
@@ -307,7 +330,7 @@
 
 
 
-    // Mendengarkan perubahan pada radio button basemap
+    // Mengambil perubahan pada radio button basemap
     document.querySelectorAll('input[name="basemap"]').forEach(function (radio) {
       radio.addEventListener('change', function () {
         // Hapus semua layer basemap yang ada di peta
@@ -330,7 +353,8 @@
         }
       });
     });
-    // Mendengarkan perubahan status checkbox dan menyesuaikan visibilitas layer
+
+    // Mengambil perubahan status checkbox dan menyesuaikan visibilitas layer
     document.getElementById('batasITSCheckbox').addEventListener('change', function () {
       if (this.checked) {
         map.addLayer(batasITS);
