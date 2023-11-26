@@ -6,11 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webgis Kampus</title>
 
-  <!-- leaflet system -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Leaflet system -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <!-- Dependency to Leaflet Draw -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
+    integrity="sha512-gc3xjCmIy673V6MyOAZhIW93xhM9ei1I+gLbmFjUHIjocENRsLX/QUE1htk5q1XV2D/iie/VQ8DXI6Vu8bexvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"
+    integrity="sha512-ozq8xQKq6urvuU6jNgkfqAmT7jKN2XumbrX1JiB3TnF7tI48DPI4Gy1GXKD/V3EExgAs1V+pRO7vwtS1LHg0Gw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Leaflet QgsMeasure -->
+  <script type="application/javascript" src="https://unpkg.com/leaflet-qgsmeasure@0.0.8/dist/leaflet.qgsmeasure.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-qgsmeasure@0.0.8/dist/leaflet.qgsmeasure.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <link rel="stylesheet" href="assets/css/style.css" />
 
@@ -35,7 +42,6 @@
           <li>
             <a href="#" id="layer-toggle">Layer</a>
           </li>
-          <li><a href="#" id="">menu 2</a></li>
           <li><a href="#" id="info-toggle">Info</a></li>
         </ul>
         <div class="hamb">+</div>
@@ -93,8 +99,15 @@
 
   <div id="modal1" class="modal">
     <div class="modal-content">
-      <span class="close" id="closeModalBtn">&times;</span>
+      <div class="close" id="closeModalBtn">&times;</div>
       <p>Hello! This is a simple modal.</p>
+      <p><b>Attribution</b></p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, aliquam incidunt placeat illum nostrum
+        facere minus, id tempore sed sunt sit deserunt, explicabo obcaecati aut debitis distinctio ipsum nesciunt omnis!
+      </p>
+      <p><b>Date created:</b> 26-nov 2023</p>
+      <p><b>Developer by</b><a href="https://github.com/zakialawi02"> Zaki</a></p>
+      <p>Project detail <a href="https://github.com/zakialawi02/mini-project-basic-webgis"> here</a></p>
     </div>
   </div>
 
@@ -140,6 +153,7 @@
       zoomControl: true,
     });
     L.control.scale().addTo(map);
+    L.Control.qgsmeasure().addTo(map);
 
     // make group data
     let zonaITS = L.layerGroup().addTo(map);
